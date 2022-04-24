@@ -17,11 +17,14 @@ gunzip -duntreated_sra_data.fastq.gz
 ```
 
 ## Check read quality - FASTQC
-
+```
 module load fastqc 
 
 fastqc treated_sra_data.fastq
+fastqc untreated_sra_data.fastq
 
+#move html output files to computer via FileZilla to view in web brower
+```
 # Generating alignment files - bowtie2 
 ```
 module load bowtie2
