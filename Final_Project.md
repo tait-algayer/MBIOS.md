@@ -25,7 +25,7 @@ fastqc untreated_sra_data.fastq
 
 #move html output files to computer via FileZilla to view in web brower
 ```
-# Generating alignment files - bowtie2 
+## Generating alignment files - bowtie2 
 ```
 module load bowtie2
 
@@ -34,9 +34,11 @@ bowtie2-build -f /data/kelley/projects/eelpout/mbios/S288C_reference_genome_R64-
 bowtie2 -x refgen -p 2 -U treated_sra_data.fastq -S treated_sra_data.sam
 
 bowtie2 -x refgen -p 2 -U untreated_sra_data.fastq.gz -S untreated_sra_data.sam
+
+bowtie2 -x refgen -p 2 -U sra_data.fastq -S sra_data.fastq2.sam
 ```
 
-# Processing alignment files- samtools
+## Processing alignment files- samtools
 ```
 module load samtools 
 
@@ -44,9 +46,15 @@ module load samtools
 samtools view -b treated_sra_data.sam -o treated_sra_data.bam
 samtools view -b untreated_sra_data.sam -o untreated_sra_data.sam
 
+samtools view -b 2sra_data.sam -o 2sra_data.sam
+
 #bam --> bam.sorted
 samtools sort Untreatedtrimmed.bam > Untreatedtrimmedsorted.bam
 samtools sort Treatedtrimmed.bam > Treatedtrimmedsorted.bam
 
 #create pileup files 
 ```
+
+## Scan for Variants - Varscan
+```
+java -jar "VarScan.v2.3.9.jar"
