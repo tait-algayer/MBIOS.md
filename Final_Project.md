@@ -53,8 +53,24 @@ samtools sort Untreatedtrimmed.bam > Untreatedtrimmedsorted.bam
 samtools sort Treatedtrimmed.bam > Treatedtrimmedsorted.bam
 
 #create pileup files 
+
+samtools mpileup -A -f S288C_reference_genome_R64-3-1_20210421/S288C_reference_sequence_R64-3-1_20210421.fsa treated_sra_data.bam > treated_sra_data.mpileup
+
+samtools mpileup -A -f S288C_reference_genome_R64-3-1_20210421/S288C_reference_sequence_R64-3-1_20210421.fsa untreated_sra_data.bam > untreated_sra_data.mpileup
 ```
 
 ## Scan for Variants - Varscan
 ```
 java -jar "VarScan.v2.3.9.jar"
+
+java -jar VarScan.jar mpileup2snp Untreated.mpileup --min-coverage 10 min-var-freq 0.45 --p-value 0.05 --minfreq-
+for-hom 0.9 > UntreatedS288C_SNPs_Varscan.txt
+java -jar VarScan.jar mpileup2snp Treated2.mpileup --min-coverage 10 min-var-freq 0.45 --p-value 0.05 --min-freqfor-
+hom 0.9 > Treated2S288C_SNPs_Varscan.txt
+```
+# Bedtools 
+```
+bedtools intersect -v -a Treated2S288C_SNPs_Varscan.txt -b UntreatedS288C_SNPs_Varscan.txt >
+Uniquetreated.txt
+bedtools intersect -wb -a Uniquetreated.txt -b augustusGene.txt > Treateduniquegenes.txt
+```
