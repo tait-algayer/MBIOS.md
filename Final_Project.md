@@ -65,9 +65,6 @@ java -jar VarScan.v2.3.9.jar mpileup2snp treated_sra_data.mpileup --min-coverage
 
 java -jar VarScan.v2.3.9.jar mpileup2snp untreated_data.mpileup --min-coverage 10 min-var-freq 0.45 --p-value 0.05 --min-freq- for-hom 0.9 > untreated_varscan.txt
 
-#make files tab separated by column
-paste - - < treated_varscan.txt
-paste - - < untreated_varscan.txt
 ```
 ## Bedtools 
 ```
