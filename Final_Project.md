@@ -63,11 +63,16 @@ java -jar "VarScan.v2.3.9.jar"
 
 java -jar VarScan.v2.3.9.jar mpileup2snp treated_sra_data.mpileup --min-coverage 10 min-var-freq 0.45 --p-value 0.05 --minfreq- for-hom 0.9 > treated_varscan.txt
 
-java -jar VarScan.jar mpileup2snp untreated_data.mpileup --min-coverage 10 min-var-freq 0.45 --p-value 0.05 --min-freqfor-
-hom 0.9 > untreated_varscan.txt
+java -jar VarScan.v2.3.9.jar mpileup2snp untreated_data.mpileup --min-coverage 10 min-var-freq 0.45 --p-value 0.05 --min-freq- for-hom 0.9 > untreated_varscan.txt
+
+#make files tab separated by column
+paste - - < treated_varscan.txt
+paste - - < untreated_varscan.txt
 ```
 # Bedtools 
 ```
-bedtools intersect -v -a treated_varscan.txt -b untreated_varscan.txt > merged.txt
+module load bedtools 
+
+bedtools intersect -v -a treated_varscan_BED.txt -b untreated_varscan_BED.txt > merged.txt
 bedtools intersect -wb -a merged.txt -b MBIOS_gene_positions.txt > treated_genes.txt
 ```
