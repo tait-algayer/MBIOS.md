@@ -69,7 +69,7 @@ java -jar VarScan.v2.3.9.jar mpileup2snp untreated_data.mpileup --min-coverage 1
 paste - - < treated_varscan.txt
 paste - - < untreated_varscan.txt
 ```
-# Bedtools 
+## Bedtools 
 ```
 module load bedtools 
 
